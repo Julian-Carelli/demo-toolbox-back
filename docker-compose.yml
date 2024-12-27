@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: demo-toolbox-back-container
+    image: node:14-alpine
+    entrypoint: /bin/sh
+    volumes:
+      - .:/app
+    tty: true
+    ports:
+      - "3006:3006"
+    working_dir: /app
