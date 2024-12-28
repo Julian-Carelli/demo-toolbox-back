@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "mocha",
+    "test": "mocha --exit",
     "docker:create": "docker-compose up -d",
     "docker:rebuild": "docker-compose up --build --no-recreate -d"
   },

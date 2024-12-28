@@ -5,7 +5,7 @@ const routes = require('./routes');
 app.use(express.json());
 app.use('/', routes);
 
-const PORT = 3006;
+const PORT = 3005;
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

@@ -9,5 +9,5 @@ services:
       - .:/app
     tty: true
     ports:
-      - "3006:3006"
+      - "3005:3005"
     working_dir: /app
