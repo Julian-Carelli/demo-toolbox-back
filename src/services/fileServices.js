@@ -44,7 +44,7 @@ const getFiles = async (fileName) => {
   }
 
   try {
-    const response = await axiosInstance.get(`secret/files`)
+    const response = await axiosInstance.get('secret/files')
     const data = response.data
 
     setCache(cacheKey, data)
@@ -58,39 +58,39 @@ const getFiles = async (fileName) => {
 
 const formatFiles = async (files) => {
   if (!Array.isArray(files)) {
-    throw new Error('Invalid input: files must be an array.');
+    throw new Error('Invalid input: files must be an array.')
   }
 
-  const formattedData = [];
+  const formattedData = []
 
   for (const fileContent of files) {
     if (typeof fileContent !== 'string' || !fileContent.trim()) {
-      console.warn('Skipping invalid or empty file content.');
-      continue;
+      console.warn('Skipping invalid or empty file content.')
+      continue
     }
 
-    const lines = fileContent.split('\n').map((line) => line.trim());
-    const header = lines.shift();
+    const lines = fileContent.split('\n').map((line) => line.trim())
+    const header = lines.shift()
 
     if (!header || header !== 'file,text,number,hex') {
-      console.warn(`Skipping file with invalid header: ${header}`);
-      continue;
+      console.warn(`Skipping file with invalid header: ${header}`)
+      continue
     }
 
-    const fileName = lines[0]?.split(',')[0];
+    const fileName = lines[0]?.split(',')[0]
     if (!fileName) {
-      console.warn('Skipping file with missing file name.');
-      continue;
+      console.warn('Skipping file with missing file name.')
+      continue
     }
 
     const validLines = lines.filter((line) => {
-      const columns = line.split(',');
+      const columns = line.split(',')
       if (columns.length !== 4) {
-        console.warn(`Invalid line format in file ${fileName}: ${line}`);
-        return false;
+        console.warn(`Invalid line format in file ${fileName}: ${line}`)
+        return false
       }
 
-      const [currentFileName, text, number, hex] = columns;
+      const [currentFileName, text, number, hex] = columns
 
       if (
         currentFileName !== fileName ||
@@ -98,35 +98,35 @@ const formatFiles = async (files) => {
         isNaN(Number(number)) ||
         !/^[a-f0-9]{32}$/.test(hex)
       ) {
-        console.warn(`Invalid data in file ${fileName}: ${line}`);
-        return false;
+        console.warn(`Invalid data in file ${fileName}: ${line}`)
+        return false
       }
 
-      return true;
-    });
+      return true
+    })
 
     if (validLines.length === 0) {
-      console.warn(`The file ${fileName} contains no valid lines after processing.`);
-      continue;
+      console.warn(`The file ${fileName} contains no valid lines after processing.`)
+      continue
     }
 
     const formattedLines = validLines.map((line) => {
-      const [, text, number, hex] = line.split(',');
+      const [, text, number, hex] = line.split(',')
       return {
         text,
         number: Number(number),
-        hex,
-      };
-    });
+        hex
+      }
+    })
 
     formattedData.push({
       file: fileName,
-      lines: formattedLines,
-    });
+      lines: formattedLines
+    })
   }
 
-  return formattedData;
-};
+  return formattedData
+}
 
 const processSingleFile = async (fileName) => {
   try {
@@ -146,7 +146,7 @@ const processAllFiles = async () => {
 
     const unformattedFiles = await Promise.all(files)
 
-    const validFiles = unformattedFiles.filter((file) => file !== null);
+    const validFiles = unformattedFiles.filter((file) => file !== null)
 
     const formattedFiles = await formatFiles(validFiles)
     return formattedFiles
@@ -189,8 +189,7 @@ const listUnformattedFiles = async () => {
   }
 
   try {
-    
-    const unformattedFiles = await getFiles();
+    const unformattedFiles = await getFiles()
     setCache(cacheKey, unformattedFiles)
 
     return unformattedFiles
