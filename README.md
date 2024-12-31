@@ -105,3 +105,25 @@ To run tests:
 ```
 npm run test
 ```
+
+------------------------------------------------------
+
+### Testing endpoints
+
+To test the /data endpoint:
+
+```
+curl --location 'http://localhost:3005/api/files/data'
+```
+
+To test the /data endpoint with the fileName query parameter:
+
+```
+curl --location 'http://localhost:3005/api/files/data?fileName=test2.csv'
+```
+
+To test the /list endpoint:
+
+```
+curl --location 'http://localhost:3005/api/files/list'
+```
