@@ -11,3 +11,5 @@ services:
     ports:
       - "3005:3005"
     working_dir: /app
+    env_file:
+      - .env

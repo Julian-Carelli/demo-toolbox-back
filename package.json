@@ -8,9 +8,10 @@
     "test": "test"
   },
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "test": "mocha --exit",
+    "start": "nodemon src/index.js",
+    "test": "mocha --recursive --exit",
+    "standard": "standard",
+    "standard:fix": "standard --fix",
     "docker:create": "docker-compose up -d",
     "docker:rebuild": "docker-compose up --build --no-recreate -d"
   },
@@ -18,13 +19,27 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.2"
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "node-cache": "^5.1.2"
   },
   "devDependencies": {
     "chai": "^4.3.0",
     "chai-http": "^4.3.0",
     "mocha": "^10.2.0",
-    "supertest": "^7.0.0",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "sinon": "^19.0.2",
+    "standard": "^17.1.2",
+    "supertest": "^7.0.0"
+  },
+  "standard": {
+    "ignore": [
+      "**/*.test.js"
+    ],
+    "env": {
+      "jest": true,
+      "node": true
+    }
   }
 }

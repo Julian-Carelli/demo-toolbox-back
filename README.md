@@ -13,6 +13,15 @@ Have these ports available:
   - 3005 ==> demo-toolbox-back (API)
 ```
 
+Ensure you have a `.env` file in the root of the project to load the necessary environment variables. Example `.env` file:
+
+```env
+  FILE_SERVICES_API_URL=
+  FILE_SERVICES_API_KEY=
+```
+
+This `.env` file will be automatically loaded by Docker when using the `docker-compose.yml` configuration mentioned earlier.
+
 ### Installation 🔧
 
 Clone project:
@@ -36,7 +45,7 @@ npm i
 Run the command for the development environment:
 
 ```
-npm run dev
+npm run start
 ```
 
 To run tests:
@@ -82,7 +91,7 @@ npm i
 Run the command for the development environment:
 
 ```
-npm run dev
+npm run start
 ```
 
 ------------------------------------------------------

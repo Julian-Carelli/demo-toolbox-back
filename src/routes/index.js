@@ -1,8 +1,12 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const fileRouter = require('./fileRoutes')
 
-router.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the app!' });
-});
+const router = express.Router()
 
-module.exports = router;
+router.get('/status', (req, res) => {
+  res.json({ message: 'Service is up and running!' })
+})
+
+router.use('/files', fileRouter)
+
+module.exports = router
