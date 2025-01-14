@@ -132,7 +132,7 @@ const processSingleFile = async (fileName) => {
   try {
     const fileContent = await getFile(fileName)
     const formattedFile = await formatFiles([fileContent])
-    return { file: fileName, lines: formattedFile }
+    return formattedFile
   } catch (error) {
     console.error(`Error processing file ${fileName}: ${error.message}`)
     throw error
